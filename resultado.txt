@@ -1,0 +1,46 @@
+D:\GIT\TESTUNIT\JC_NETTestUnit\NETTestUnit_06>docker build -t juancarloslopezpanel/nettestunit_06:firsttry .
+Sending build context to Docker daemon  1.015MB
+Step 1/7 : FROM microsoft/dotnet:2.0.3-sdk AS builder
+2.0.3-sdk: Pulling from microsoft/dotnet
+3e17c6eae66c: Pull complete
+fdfb54153de7: Pull complete
+a4ca6e73242a: Pull complete
+93bd198d0a5f: Pull complete
+a877b799076a: Pull complete
+a40503406e2e: Pull complete
+801acdc0218e: Pull complete
+Digest: sha256:dbe23ab9427d59e6594d11210ce95095485366244e660b69318b0a1434ea0d7a
+Status: Downloaded newer image for microsoft/dotnet:2.0.3-sdk
+ ---> 00904e7b6477
+Step 2/7 : WORKDIR /home/app
+ ---> Running in 4322dfe4434e
+Removing intermediate container 4322dfe4434e
+ ---> ead2fb7bd68d
+Step 3/7 : COPY . .
+ ---> 441a0d391a79
+Step 4/7 : RUN dotnet restore
+ ---> Running in dd01c1031fd9
+/usr/share/dotnet/sdk/2.1.2/NuGet.targets(227,5): warning MSB3202: The project file "/home/app/NETTestUnit_06/NETTestUnit_06.csproj" was not found. [/home/app/NETTestUnit_06.sln]
+/home/app/NETTestUnit_06/NETTestUnit_06.csproj : warning NU1503: Skipping restore for project '/home/app/NETTestUnit_06/NETTestUnit_06.csproj'. The project file may be invalid or missing targets required for restore. [/home/app/NETTestUnit_06.sln]
+/usr/share/dotnet/sdk/2.1.2/NuGet.targets(103,5): warning : Unable to find a project to restore! [/home/app/NETTestUnit_06.sln]
+Removing intermediate container dd01c1031fd9
+ ---> 540b903e9d63
+Step 5/7 : RUN dotnet publish ./AssertExamples/AssertExamples.csproj -o /publish/
+ ---> Running in 9bc784af3048
+Microsoft (R) Build Engine version 15.5.179.9764 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restoring packages for /home/app/AssertExamples/AssertExamples.csproj...
+  Installing xunit.abstractions 2.0.2.
+  Installing xunit.extensibility.core 2.4.0.
+  Installing xunit.runner.visualstudio 2.4.0.
+  Installing xunit.extensibility.execution 2.4.0.
+  Installing xunit.core 2.4.0.
+  Installing xunit.assert 2.4.0.
+  Installing xunit.analyzers 0.10.0.
+  Installing xunit 2.4.0.
+  Generating MSBuild file /home/app/AssertExamples/obj/AssertExamples.csproj.nuget.g.props.
+  Generating MSBuild file /home/app/AssertExamples/obj/AssertExamples.csproj.nuget.g.targets.
+  Restore completed in 2.59 sec for /home/app/AssertExamples/AssertExamples.csproj.
+/usr/share/dotnet/sdk/2.1.2/Microsoft.Common.CurrentVersion.targets(1124,5): error MSB3644: The reference assemblies for framework ".NETFramework,Version=v4.5.2" were not found. To resolve this, install the SDK or Targeting Pack for this framework version or retarget your application to a version of the framework for which you have the SDK or Targeting Pack installed. Note that assemblies will be resolved from the Global Assembly Cache (GAC) and will be used in place of reference assemblies. Therefore your assembly may not be correctly targeted for the framework you intend. [/home/app/AssertExamples/AssertExamples.csproj]
+The command '/bin/sh -c dotnet publish ./AssertExamples/AssertExamples.csproj -o /publish/' returned a non-zero code: 1

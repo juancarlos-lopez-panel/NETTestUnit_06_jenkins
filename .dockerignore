@@ -1,0 +1,6 @@
+Dockerfile
+.gitignore
+.vs
+/AssertExamples/bin/*
+/AssertExamples/obj/*
+*.txt
