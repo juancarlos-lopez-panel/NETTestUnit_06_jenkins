@@ -2,7 +2,7 @@ pipeline {
     agent none
     
     stages {
-        stage ("Install application packages") {
+        stage ("Compilar") {
             agent {
                  docker {
                      image 'microsoft/dotnet-framework:4.7.2-sdk'
@@ -12,9 +12,26 @@ pipeline {
             steps {
 			// ejecución de comandos ms2
 			bat """
+			  dotnet restore
 			  dotnet publish ./AssertExamples/AssertExamples.csproj -o /publish/
 			"""
             }
         }
+		
+        stage ("Test") {
+            agent {
+                 docker {
+                     image 'microsoft/dotnet-framework:4.7.2-sdk'
+					 args '-p 3000:3000 -p 5000:5000'
+                 }
+             }
+            steps {
+			// ejecución de comandos ms2
+			bat """
+			  dotnet test
+			"""
+            }
+        }
+		
     }
 }
